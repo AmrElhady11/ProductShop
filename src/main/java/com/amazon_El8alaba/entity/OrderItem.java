@@ -22,9 +22,6 @@ public class OrderItem {
     private double unitPrice;
     @Column(name = "total_price")
     private double totalPrice;
-    @OneToMany
-    @JoinColumn(name = "product_id")
-    private List<ProductEntity> productList;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;

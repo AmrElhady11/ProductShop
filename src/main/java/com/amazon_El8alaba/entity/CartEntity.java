@@ -20,8 +20,8 @@ public class CartEntity {
     private double total_price;
     @Column(name = "total_Products")
     private int total_Products;
-    @Column(name = "discont")
-    private double discont;
+    @Column(name = "discount")
+    private double discount;
     @Column(name = "creation_time")
     private LocalDateTime creation_time;
     @Column(name = "last_updated_time")
