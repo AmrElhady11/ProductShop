@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem {
+public class CartItem {
     @Min(1)
     private int quantity;
     @Min(1)

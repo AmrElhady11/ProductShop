@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Table(name = "cart_item")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem {
+public class CartItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
