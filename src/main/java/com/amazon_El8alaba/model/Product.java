@@ -1,5 +1,6 @@
 package com.amazon_El8alaba.model;
 
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,9 @@ public class Product {
     private String manufacturer;
     private LocalDateTime productionTime;
     private LocalDateTime expirationDate;
+    @Min(1)
     private double unitPrice;
+    @Min(0)
     private int quantity;
     private boolean availability;
     private LocalDateTime creationTime;
