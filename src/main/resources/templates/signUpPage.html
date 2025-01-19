@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Form</title>
+
+    <!-- Link to custom stylesheet -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
+
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">User Registration Form</h2>
+            <form th:action="@{/MainPage}" th:object="${signUpDTO}" method="post" class="p-4 border rounded bg-white shadow-sm">
+                <!-- First Name Input -->
+                <div class="form-group mb-3">
+                    <input type="text" th:field="*{firstname}" placeholder="First Name" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('firstname')}" class="alert-danger" th:errors="*{firstname}"></div>
+                </div>
+                <!-- Last Name Input -->
+                <div class="form-group mb-3">
+                    <input type="text" th:field="*{lastname}" placeholder="Last Name" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('lastname')}" class="alert-danger" th:errors="*{lastname}"></div>
+                </div>
+                <!-- Email Input -->
+                <div class="form-group mb-3">
+                    <input type="text" th:field="*{email}" placeholder="Email" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('email')}" class="alert-danger" th:errors="*{email}"></div>
+                </div>
+                <!-- Username Input -->
+                <div class="form-group mb-3">
+                    <input type="text" th:field="*{username}" placeholder="Username" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('username')}" class="alert-danger" th:errors="*{username}"></div>
+                </div>
+                <!-- Password Input -->
+                <div class="form-group mb-3">
+                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('password')}" class="alert-danger" th:errors="*{password}"></div>
+                </div>
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger btn-block">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

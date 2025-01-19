@@ -31,7 +31,7 @@ public class UserEntity {
     @Column(name = "role")
     private Role role;
     @Column(name = "creation_time")
-    private LocalDateTime creationTime;
+    private  LocalDateTime creationTime;
     @Column(name = "last_updated_time")
     private LocalDateTime lastUpdateTime;
 

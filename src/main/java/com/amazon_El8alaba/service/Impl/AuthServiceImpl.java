@@ -31,13 +31,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String register(SignUpDTO registerDTO) {
+    public boolean register(SignUpDTO registerDTO) {
         UserEntity newUser = mapToEntity(registerDTO);
       UserEntity theUser =  userRepository.save(newUser);
       if (theUser != null) {
-          return "You have successfully registered!";
+          return true;
       }
-        return  "There is something wrong";
+        return  false;
     }
 
     @Override
