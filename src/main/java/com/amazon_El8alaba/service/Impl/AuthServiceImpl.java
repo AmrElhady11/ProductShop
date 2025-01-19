@@ -20,14 +20,12 @@ public class AuthServiceImpl implements AuthService {
         this.modelMapper = modelMapper;
     }
     @Override
-    public String Login(LoginDTO loginDTO) {
+    public UserEntity Login(LoginDTO loginDTO) {
         String username = loginDTO.getUsername();
         String password = loginDTO.getPassword();
       UserEntity theUser =  userRepository.findByEmailAndPassword(username, password);
-      if (theUser != null) {
-          return "You have successfully logged in!";
-      }
-        return "There is no such user";
+
+        return theUser;
     }
 
     @Override

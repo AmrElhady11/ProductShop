@@ -1,7 +1,10 @@
 package com.amazon_El8alaba.controller;
 
+import com.amazon_El8alaba.entity.UserEntity;
+import com.amazon_El8alaba.model.LoginDTO;
 import com.amazon_El8alaba.model.SignUpDTO;
 import com.amazon_El8alaba.service.AuthService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,14 +22,31 @@ public class UserController {
     public UserController(AuthService authService) {
         this.authService = authService;
     }
-    @RequestMapping("/signUp")
+    @PostMapping("/signUp")
     public String showSignUpForm(Model model) {
-        model.addAttribute("signUpDTO", new SignUpDTO());
+        model.addAttribute("newUser", new SignUpDTO());
         return "signUpPage";
 
     }
-    @RequestMapping("/MainPage")
-    public String test(@Valid @ModelAttribute("signUpDTO") SignUpDTO userModel, BindingResult bindingResult, Model model) throws SQLException {
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("theUser", new LoginDTO());
+        return "LoginForm";
+
+    }
+    @PostMapping("/MainPage")
+    public String processLogin(Model model,HttpSession session) {
+        UserEntity theUser =authService.Login((LoginDTO) model.getAttribute("theUser"));
+        if(theUser != null){
+            session.setAttribute("currentUser",theUser);
+            return "MainPage";
+        }
+        else
+            return "LoginForm";
+
+    }
+    @PostMapping("/confirmationPage")
+    public String test(@Valid @ModelAttribute("newUser") SignUpDTO userModel, BindingResult bindingResult, Model model) throws SQLException {
 
         if(bindingResult.hasErrors())
             return "signUpPage";
