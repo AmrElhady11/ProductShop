@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Form</title>
+    <title>amazon-El8alaba</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -29,7 +29,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center mb-4">Registration Form</h2>
-            <form th:action="@{/MainPage}" th:object="${newUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
+            <form th:action="@{/confirmation}" th:object="${newUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
                 <!-- First Name Input -->
                 <div class="form-group mb-3">
                     <input type="text" th:field="*{firstname}" placeholder="First Name" class="form-control"/>

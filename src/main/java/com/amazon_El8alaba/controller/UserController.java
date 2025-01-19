@@ -3,7 +3,9 @@ package com.amazon_El8alaba.controller;
 import com.amazon_El8alaba.entity.UserEntity;
 import com.amazon_El8alaba.model.LoginDTO;
 import com.amazon_El8alaba.model.SignUpDTO;
+import com.amazon_El8alaba.model.User;
 import com.amazon_El8alaba.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -22,30 +25,13 @@ public class UserController {
     public UserController(AuthService authService) {
         this.authService = authService;
     }
-    @PostMapping("/signUp")
+    @RequestMapping("/createAccount")
     public String showSignUpForm(Model model) {
         model.addAttribute("newUser", new SignUpDTO());
         return "signUpPage";
 
     }
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("theUser", new LoginDTO());
-        return "LoginForm";
-
-    }
-    @PostMapping("/MainPage")
-    public String processLogin(Model model,HttpSession session) {
-        UserEntity theUser =authService.Login((LoginDTO) model.getAttribute("theUser"));
-        if(theUser != null){
-            session.setAttribute("currentUser",theUser);
-            return "MainPage";
-        }
-        else
-            return "LoginForm";
-
-    }
-    @PostMapping("/confirmationPage")
+    @PostMapping("/confirmation")
     public String test(@Valid @ModelAttribute("newUser") SignUpDTO userModel, BindingResult bindingResult, Model model) throws SQLException {
 
         if(bindingResult.hasErrors())
@@ -57,8 +43,32 @@ public class UserController {
         else
             System.out.println(String.format("Employee %s save failed", userModel.getFirstname()));
 
-        return "MainPage";
+        return "confirmationPage";
 
     }
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("theUser", new LoginDTO());
+        return "LoginForm";
+
+    }
+    @PostMapping("/MainPage")
+    public String processLogin(@ModelAttribute("theUser") LoginDTO user, HttpServletRequest request,Model model) {
+        System.out.println(user.getUsername());
+        User theUser =authService.Login((LoginDTO)user);
+        if(theUser != null){
+//            HttpSession session = request.getSession();
+
+//            session.setAttribute("currentUser",theUser);
+            System.out.println("iam not null");
+            model.addAttribute("currentUser",theUser);
+
+            return "MainPage";
+        }
+        else
+            return "LoginForm";
+
+    }
+
 
 }
