@@ -5,17 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Styled Form</title>
 
-    <!-- Link to custom stylesheet -->
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}">
-
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        .slogan {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff9900;
+            text-align: center;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
 </head>
 <body class="bg-light">
+<!-- Slogan Section -->
+<div class="slogan">
+    amazon-El8alaba
+</div>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="text-center mb-4">User Registration Form</h2>
+            <h2 class="text-center mb-4">Registration Form</h2>
             <form th:action="@{/MainPage}" th:object="${signUpDTO}" method="post" class="p-4 border rounded bg-white shadow-sm">
                 <!-- First Name Input -->
                 <div class="form-group mb-3">
