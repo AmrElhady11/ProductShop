@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Import Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></head>
+<body>
+<h1>ProductShop</h1>
+<div class="tbl-div">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Show Details</th>
+            <th scope="col">Add/Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${productsList}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td>
+                <form th:action="@{/showProductDetails(id=${item.id})}" method="post">
+                    <input type="submit" class="btn btn-primary" value="View Details"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/updateProduct}" method="post">
+                    <input type="submit" class="btn btn-warning" value="Add/update Details"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/deleteProduct(id=${item.id})}" method="post">
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/addProduct}" method="post">
+        <input type="submit" class="btn btn-success" value="Add new Product"/>
+    </form>
+</div>
+</body>
+</html>

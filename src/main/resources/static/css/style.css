@@ -1,0 +1,18 @@
+.error {
+    color: red;
+}
+
+
+
+
+.table-div {
+    position: absolute;
+    top: 70%;
+    left: 35%;
+    transform: translate(-30%, -30%);
+}
+
+.test
+{
+    color: #20c997;
+}
