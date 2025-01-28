@@ -1,11 +1,9 @@
 package com.amazon_El8alaba.controller;
 
-import com.amazon_El8alaba.entity.UserEntity;
 import com.amazon_El8alaba.model.LoginDTO;
 import com.amazon_El8alaba.model.SignUpDTO;
 import com.amazon_El8alaba.model.User;
 import com.amazon_El8alaba.service.AuthService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -64,6 +61,19 @@ public class UserController {
         else
             return "UserManagement/LoginForm";
 
+    }
+    @GetMapping("/forgotPassword")
+    public String forgotPassword(Model model){
+
+        model.addAttribute("theUser",new User());
+        return "UserManagement/findEmail";
+
+    }
+    @PostMapping("/sendVerificationCode")
+    public String confirmPassword(@Valid @ModelAttribute("theUser") User userModel, BindingResult bindingResult,Model model){
+            model.addAttribute("theUser",userModel);
+
+        return "UserManagement/VerificationCode";
     }
 
 
