@@ -1,7 +1,9 @@
 package com.amazon_El8alaba.controller;
 
+import com.amazon_El8alaba.enums.Role;
 import com.amazon_El8alaba.model.Product;
 import com.amazon_El8alaba.model.ProductDetails;
+import com.amazon_El8alaba.model.User;
 import com.amazon_El8alaba.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -21,22 +23,28 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("/home")
-    public String goToHomePage(Model model) {
+    public String goToHomePage(Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        if(currentUser==null)
+            return "redirect:/login";
+        if(currentUser.getRole()!= Role.ADMIN)
+            return "ErrorManagement/NotAllowed";
+        System.out.println("========================================"+ currentUser.getEmail());
         List<Product> productsList = productService.getAllProduct();
         model.addAttribute("productsList",productsList);
 
-    return "HomePage";
+    return "ProjectManagement/HomePage";
     }
     @PostMapping("/showProductDetails")
     public String showProductDetails(@RequestParam int id,Model model){
        ProductDetails theProduct = productService.getProductDetails(id);
        model.addAttribute("productModel",theProduct);
-        return "viewDetails";
+        return "ProjectManagement/viewDetails";
     }
     @PostMapping("/processForm")
     public String processForm(@Valid @ModelAttribute("productModel") ProductDetails theProduct , BindingResult result,@RequestParam int id){
         if(result.hasErrors()){
-            return "viewDetails";
+            return "ProjectManagement/viewDetails";
         }
         ProductDetails updatedProduct = productService.getProductDetails(id);
         updatedProduct.setName(theProduct.getName());
@@ -47,13 +55,13 @@ public class ProductController {
     @PostMapping("/addProduct")
     public String addProduct(Model model){
         model.addAttribute("productModel",new ProductDetails());
-        return "addProduct";
+        return "ProjectManagement/addProduct";
     }
 
     @PostMapping("/processAddProduct")
     public String processAddProduct(@Valid @ModelAttribute("productModel") ProductDetails theProduct , BindingResult result){
         if(result.hasErrors()){
-            return "addProduct";
+            return "ProjectManagement/addProduct";
         }
         productService.addProduct(theProduct);
         return "redirect:/home";
@@ -62,13 +70,13 @@ public class ProductController {
     @PostMapping("/updateProduct")
     public String updateProduct(Model model){
         model.addAttribute("productModel",new ProductDetails());
-        return "updateDetails";
+        return "ProjectManagement/updateDetails";
     }
 
     @PostMapping("/processUpdateProductForm")
     public String processUpdateProductForm(@Valid @ModelAttribute("productModel") ProductDetails theProduct , BindingResult result){
         if(result.hasErrors()){
-            return "updateDetails";
+            return "ProjectManagement/updateDetails";
         }
         productService.updateProduct(theProduct);
         return "redirect:/home";
