@@ -55,6 +55,11 @@
           <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
           <div th:if="${#fields.hasErrors('password')}" class="alert-danger" th:errors="*{password}"></div>
         </div>
+        <!-- Confirm Password Input -->
+        <div class="form-group mb-3">
+          <input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" class="form-control"/>
+          <div th:if="${#fields.hasErrors('confirmPassword')}" class="alert-danger" th:errors="*{confirmPassword}"></div>
+        </div>
         <!-- Submit Button -->
         <div class="form-group">
           <button type="submit" class="btn btn-danger btn-block">Register</button>

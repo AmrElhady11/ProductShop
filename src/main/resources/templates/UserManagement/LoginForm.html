@@ -72,7 +72,7 @@
       <form th:action="@{/MainPage}" th:object="${theUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
         <!-- Username Input -->
         <div class="form-group mb-3">
-          <input type="text" th:field="*{email}" placeholder="Username" class="form-control"/>
+          <input type="text" th:field="*{email}" placeholder="Email" class="form-control"/>
           <div th:if="${#fields.hasErrors('email')}" class="alert-danger" th:errors="*{email}"></div>
         </div>
         <!-- Password Input -->
@@ -86,7 +86,7 @@
         </div>
         <!-- Forgotten Password Link -->
         <div class="additional-links">
-          <a href="/forgot-password" class="btn btn-link">Forgotten Password?</a>
+          <a href="/forgotPassword" class="btn btn-link">Forgotten Password?</a>
         </div>
         <!-- Create New Account Button -->
         <div class="additional-links">

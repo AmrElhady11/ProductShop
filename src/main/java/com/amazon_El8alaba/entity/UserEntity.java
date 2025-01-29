@@ -28,6 +28,8 @@ public class UserEntity {
     private String email;
     @Column(name = "password")
     private String password;
+    @Transient
+    private String confirmPassword;
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role ;

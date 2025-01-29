@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Form</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        .slogan {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff9900;
+            text-align: center;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .additional-links a {
+            display: block;
+            margin-top: 5px;
+        }
+
+
+        .login-btn {
+            background-color: #ff9900; /* Set the background color to #ff9900 */
+            color: white; /* Ensure text is white */
+            font-weight: bold; /* Make the text bold */
+            padding: 10px 20px; /* Larger padding for the Log in button */
+            width: 100%; /* Full width for 'Log in' button */
+        }
+        .login-btn:hover {
+            background-color: #e68a00; /* Slightly darker shade on hover */
+            color: white;
+        }
+        .helping-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4CAF50; /* Green color */
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
+<div class="slogan">
+    Product-Shop
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/sendVerificationCode}" th:object="${theUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
+                <!-- email Input -->
+                <div class="form-group mb-3">
+                    <input type="text" th:field="*{email}" placeholder="Username" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('email')}" class="alert-danger" th:errors="*{email}"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block login-btn">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Helping Text at the Bottom -->
+<div class="helping-text">
+    Helping you to attain your goals
+</div>
 
 </body>
 </html>

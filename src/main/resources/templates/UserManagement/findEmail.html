@@ -53,7 +53,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <form th:action="@{/sendVerificationCod}" th:object="${theUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
+      <form th:action="@{/sendVerificationCode}" th:object="${theUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
         <!-- email Input -->
         <div class="form-group mb-3">
           <input type="text" th:field="*{email}" placeholder="Username" class="form-control"/>

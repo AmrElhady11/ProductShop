@@ -69,7 +69,8 @@ public class UserController {
         return "UserManagement/findEmail";
 
     }
-    @PostMapping("/sendVerificationCode")
+    @ResponseBody
+    @RequestMapping("/sendVerificationCode")
     public String confirmPassword(@Valid @ModelAttribute("theUser") User userModel, BindingResult bindingResult,Model model){
             model.addAttribute("theUser",userModel);
 
