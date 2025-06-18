@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Form</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <style>
+    .slogan {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff9900;
+      text-align: center;
+      margin-top: 20px;
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+    }
+    .additional-links {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .additional-links a {
+      display: block;
+      margin-top: 5px;
+    }
+    .create-account-btn {
+      background-color: #90EE90;
+      color: white;
+      font-size: 0.9rem;
+      padding: 8px 18px;
+      text-align: center;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      width: auto;
+    }
+    .create-account-btn:hover {
+      background-color: #76c276;
+      color: white;
+    }
+    .login-btn {
+      background-color: #ff9900; /* Set the background color to #ff9900 */
+      color: white; /* Ensure text is white */
+      font-weight: bold; /* Make the text bold */
+      padding: 10px 20px; /* Larger padding for the Log in button */
+      width: 100%; /* Full width for 'Log in' button */
+    }
+    .login-btn:hover {
+      background-color: #e68a00; /* Slightly darker shade on hover */
+      color: white;
+    }
+    .helping-text {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4CAF50; /* Green color */
+      text-align: center;
+      margin-top: 30px;
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-light">
+<div class="slogan">
+  amazon-El8alaba
+</div>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form th:action="@{/MainPage}" th:object="${theUser}" method="post" class="p-4 border rounded bg-white shadow-sm">
+        <!-- Username Input -->
+        <div class="form-group mb-3">
+          <input type="text" th:field="*{email}" placeholder="Email" class="form-control"/>
+          <div th:if="${#fields.hasErrors('email')}" class="alert-danger" th:errors="*{email}"></div>
+        </div>
+        <!-- Password Input -->
+        <div class="form-group mb-3">
+          <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+          <div th:if="${#fields.hasErrors('password')}" class="alert-danger" th:errors="*{password}"></div>
+        </div>
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-block login-btn">Log in</button>
+        </div>
+        <!-- Forgotten Password Link -->
+        <div class="additional-links">
+          <a href="/forgotPassword" class="btn btn-link">Forgotten Password?</a>
+        </div>
+        <!-- Create New Account Button -->
+        <div class="additional-links">
+          <a href="/createAccount" class="create-account-btn">Create new account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Helping Text at the Bottom -->
+<div class="helping-text">
+  Helping you to attain your goals
+</div>
+
+</body>
+</html>
